@@ -4,6 +4,7 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     private Vector3 offset;
+    private Vector3 lastPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,7 +15,14 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = player.transform.position + offset; 
+        if (player != null)
+        {
+            transform.position = player.transform.position + offset; 
+            lastPos = transform.position;
+        } else
+        {
+            transform.position = lastPos;
+        }
 
     }
 }

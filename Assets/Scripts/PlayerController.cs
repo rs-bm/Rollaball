@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     public float speed = 0; 
+    private int WIN_COUNT = 8;
+    public AudioSource pickupAudioSource;
+    public AudioSource winAudioSource;
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
+            pickupAudioSource.Play();
             other.gameObject.SetActive(false);
             count++;
             SetCountText();
@@ -48,8 +53,9 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text =  "Count: " + count.ToString();
-        if (count >= 4)
+        if (count >= WIN_COUNT)
         {
+            winAudioSource.Play();
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
@@ -59,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            collision.gameObject.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
             winTextObject.gameObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = ":(";
