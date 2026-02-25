@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<AudioSource>().Play();
+            collision.gameObject.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject);
             winTextObject.gameObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = ":(";
