@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource pickupAudioSource;
     public AudioSource winAudioSource;
     public ParticleSystem winEffect;
+    private Boolean trailPlaying = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,9 +38,20 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
         rb.AddForce(movement * speed); 
         Vector3 velocity = -rb.linearVelocity;
-        if (velocity.x != 0 || velocity.z != 0)
+        if (velocity.magnitude > 1)
         {
+            if (trailPlaying == false)
+            {
+                GetComponent<ParticleSystem>().Play();
+                trailPlaying = true;
+
+            }
             GetComponent<ParticleSystem>().transform.rotation = Quaternion.LookRotation(velocity);
+        }
+        if (velocity.magnitude < 1)
+        {
+            GetComponent<ParticleSystem>().Stop();
+            trailPlaying = false;
         }
     }
     
