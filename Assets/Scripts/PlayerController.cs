@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private int WIN_COUNT = 8;
     public AudioSource pickupAudioSource;
     public AudioSource winAudioSource;
-    
+    public ParticleSystem winEffect;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,14 +29,17 @@ public class PlayerController : MonoBehaviour
         Vector2 movementVector = movementValue.Get<Vector2>(); 
         movementX = movementVector.x;
         movementY = movementVector.y;
-
-
     }
 
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
         rb.AddForce(movement * speed); 
+        Vector3 velocity = -rb.linearVelocity;
+        if (velocity.x != 0 || velocity.z != 0)
+        {
+            GetComponent<ParticleSystem>().transform.rotation = Quaternion.LookRotation(velocity);
+        }
     }
     
     void OnTriggerEnter(Collider other)
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
         if (count >= WIN_COUNT)
         {
             winAudioSource.Play();
+            winEffect.Play();
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
