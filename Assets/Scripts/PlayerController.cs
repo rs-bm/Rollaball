@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
             winEffect.Play();
             winTextObject.SetActive(true);
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            // still a bug where you die to the enemy after winning... not sure why the above line doesn't do it?
         }
     }
 
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             winTextObject.gameObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = ":(";
+            collision.gameObject.GetComponentInChildren<Animator>().SetFloat("speed_f", 0);
         }
     }
 }

@@ -5,6 +5,7 @@ public class EnemyMovement : MonoBehaviour
 {
  // Reference to the player's transform.
  public Transform player;
+ private Animator anim;
 
  // Reference to the NavMeshAgent component for pathfinding.
  private NavMeshAgent navMeshAgent;
@@ -12,8 +13,15 @@ public class EnemyMovement : MonoBehaviour
  // Start is called before the first frame update.
  void Start()
     {
- // Get and store the NavMeshAgent component attached to this object.
-        navMeshAgent = GetComponent<NavMeshAgent>();
+      //Get the nav mesh agent
+      navMeshAgent = GetComponent<NavMeshAgent>();
+      //Get the animator component
+      anim = GetComponentInChildren<Animator>();
+      //Set the value of speed_f
+      if (anim)
+        {
+            anim.SetFloat("speed_f", navMeshAgent.speed);
+        }
     }
 
  // Update is called once per frame.
