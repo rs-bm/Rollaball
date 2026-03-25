@@ -74,7 +74,12 @@ public class PlayerController : MonoBehaviour
             winAudioSource.Play();
             winEffect.Play();
             winTextObject.SetActive(true);
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            GameObject[] toDestroy = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject obj in toDestroy)
+            {
+                Destroy(obj);
+            }
+            toDestroy = null;
             // still a bug where you die to the enemy after winning... not sure why the above line doesn't do it?
         }
     }
