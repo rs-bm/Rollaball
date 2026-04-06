@@ -5,6 +5,7 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public float velociyMagnitude;
     private Rigidbody rb; 
     private int count;
     public TextMeshProUGUI countText;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<ParticleSystem>().Stop();
             trailPlaying = false;
         }
+        velociyMagnitude = velocity.magnitude;
     }
     
     void OnTriggerEnter(Collider other)
