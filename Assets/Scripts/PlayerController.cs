@@ -57,15 +57,20 @@ public class PlayerController : MonoBehaviour
         velociyMagnitude = velocity.magnitude;
     }
     
-    void OnTriggerEnter(Collider other)
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("PickUp"))
+    //     {
+    //         pickupAudioSource.Play();
+    //         other.gameObject.SetActive(false);
+    //         count++;
+    //         SetCountText();
+    //     }
+    // }
+    public void editCount(int change)
     {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            pickupAudioSource.Play();
-            other.gameObject.SetActive(false);
-            count++;
-            SetCountText();
-        }
+        count += change;
+        SetCountText();
     }
 
     void SetCountText()
@@ -82,7 +87,6 @@ public class PlayerController : MonoBehaviour
                 Destroy(obj);
             }
             toDestroy = null;
-            // still a bug where you die to the enemy after winning... not sure why the above line doesn't do it?
         }
     }
 
@@ -94,7 +98,7 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject);
             winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = ":(";
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "game over :(";
             collision.gameObject.GetComponentInChildren<Animator>().SetFloat("speed_f", 0);
         }
     }

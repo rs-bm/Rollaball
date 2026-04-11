@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class DimLampBehavior : MonoBehaviour
@@ -12,27 +13,25 @@ public class DimLampBehavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !lit)
         {
-            print("player touched lamp");
             GetComponent<ParticleSystem>().Play();
             pointLight.SetActive(true);
             light.SetActive(true);
             dimPointLight.SetActive(false);
             dimLight.SetActive(false);
             lit = true;
+            other.gameObject.GetComponent<PlayerController>().editCount(1);
         }
         if (other.gameObject.CompareTag("Enemy") && lit)
         {
-                       print("enemy touched lamp");
-
-                // add different particle effect
-                GetComponent<ParticleSystem>().Play();
-                pointLight.SetActive(false);
-                light.SetActive(false);
-                dimPointLight.SetActive(true);
-                dimLight.SetActive(true);
-                lit = false;
-                // add sound effect
-            
+            // REMINDER: add different particle effect
+            GetComponent<ParticleSystem>().Play();
+            pointLight.SetActive(false);
+            light.SetActive(false);
+            dimPointLight.SetActive(true);
+            dimLight.SetActive(true);
+            lit = false;
+            // REMINDER: add sound effect
+            GameObject.FindWithTag("Player").GetComponent<PlayerController>().editCount(-1);
         }
     }
 }

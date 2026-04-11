@@ -9,24 +9,22 @@ public class DarkLampBehavior : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && !lit && other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude > 10) {
-            
-                GetComponent<ParticleSystem>().Play();
-                pointLight.SetActive(true);
-                light.SetActive(true);
-                lit = true;
-                // add sound effect
-            
+            GetComponent<ParticleSystem>().Play();
+            pointLight.SetActive(true);
+            light.SetActive(true);
+            lit = true;
+            // REMINDER: add sound effect
+            other.gameObject.GetComponent<PlayerController>().editCount(1);
         }
         if (other.gameObject.CompareTag("Enemy") && lit)
         {
-            print("something happened");
-                // add different particle effect
-                GetComponent<ParticleSystem>().Play();
-                pointLight.SetActive(false);
-                light.SetActive(false);
-                lit = false;
-                // add sound effect
-            
+            // REMINDER: add different particle effect
+            GetComponent<ParticleSystem>().Play();
+            pointLight.SetActive(false);
+            light.SetActive(false);
+            lit = false;
+            // REMINDER: add sound effect
+            GameObject.FindWithTag("Player").GetComponent<PlayerController>().editCount(-1);
         }
     }
 }
