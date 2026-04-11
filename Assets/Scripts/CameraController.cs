@@ -12,13 +12,10 @@ public class CameraController : MonoBehaviour
         }
         transform.position = targetTransform.position;
         
-        float hOffset = Mathf.Clamp(targetRigidbody.linearVelocity.x, -10, 10);
-        float vOffset = Mathf.Clamp(targetRigidbody.linearVelocity.z, -10, 10);
+        float hOffset = Mathf.Clamp(targetRigidbody.linearVelocity.x, -7, 7);
+        float vOffset = Mathf.Clamp(targetRigidbody.linearVelocity.z, -7, 7);
 
-        transform.rotation = Quaternion.Euler(new Vector3(-vOffset, 0, hOffset));
-
-        // NEEDS TO BE SMOOTHED! and subtler!
-        // Slamming into walls in this state is liable to give the player a concussion in real life
-        // but u can see the vision...
+        Quaternion targetRotation = Quaternion.Euler(-vOffset, 0, hOffset);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
     }
 }
