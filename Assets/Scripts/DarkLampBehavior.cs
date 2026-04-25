@@ -5,10 +5,11 @@ public class DarkLampBehavior : MonoBehaviour
 {
     public GameObject pointLight;
     public GameObject light;
+    public float speedReq = 11;
     Boolean lit = false;
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !lit && other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude > 10) {
+        if (other.gameObject.CompareTag("Player") && !lit && other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude > speedReq) {
             GetComponent<ParticleSystem>().Play();
             pointLight.SetActive(true);
             light.SetActive(true);

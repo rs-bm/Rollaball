@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
         rb.AddForce(movement * speed); 
         Vector3 velocity = -rb.linearVelocity;
-        if (velocity.magnitude > 1)
+        if (velocity.magnitude > 3)
         {
             if (trailPlaying == false)
             {
@@ -49,24 +49,14 @@ public class PlayerController : MonoBehaviour
             }
             GetComponent<ParticleSystem>().transform.rotation = Quaternion.LookRotation(velocity);
         }
-        if (velocity.magnitude < 1)
+        if (velocity.magnitude < 3)
         {
             GetComponent<ParticleSystem>().Stop();
             trailPlaying = false;
         }
         velociyMagnitude = velocity.magnitude;
     }
-    
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("PickUp"))
-    //     {
-    //         pickupAudioSource.Play();
-    //         other.gameObject.SetActive(false);
-    //         count++;
-    //         SetCountText();
-    //     }
-    // }
+
     public void editCount(int change)
     {
         count += change;
