@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,11 +14,13 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     public float speed = 0; 
-    private int WIN_COUNT = 8;
+    private int WIN_COUNT = 2;
     public AudioSource pickupAudioSource;
     public AudioSource winAudioSource;
     public ParticleSystem winEffect;
     private Boolean trailPlaying = false;
+    public GameObject rockWall;
+    public GameObject sun;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,17 +69,8 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text =  "Count: " + count.ToString();
-        if (count >= WIN_COUNT)
-        {
-            winAudioSource.Play();
-            winEffect.Play();
-            winTextObject.SetActive(true);
-            GameObject[] toDestroy = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject obj in toDestroy)
-            {
-                Destroy(obj);
-            }
-            toDestroy = null;
+        if (count >= WIN_COUNT) {
+            onWin();
         }
     }
 
@@ -91,5 +85,23 @@ public class PlayerController : MonoBehaviour
             winTextObject.GetComponent<TextMeshProUGUI>().text = "game over :(";
             collision.gameObject.GetComponentInChildren<Animator>().SetFloat("speed_f", 0);
         }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("LevelTwo")) {
+            sun.gameObject.GetComponent<Animator>().SetTrigger("Sunset");
+        }
+    }
+    private void onWin()
+    {
+        winAudioSource.Play();
+        winEffect.Play();
+        winTextObject.SetActive(true);
+        rockWall.GetComponent<Animator>().SetTrigger("Clear");
+        GameObject[] toDestroy = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject obj in toDestroy) {
+            Destroy(obj);
+        }
+        toDestroy = null;
     }
 }

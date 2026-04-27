@@ -589,7 +589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 600894269795448789, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
       propertyPath: m_Name
-      value: Tall Lamp Unlit
+      value: Tall Lamp
       objectReference: {fileID: 0}
     - target: {fileID: 1119435735721335759, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
       propertyPath: m_IsActive
@@ -728,37 +728,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6603956161167497820, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
       insertIndex: 9
       addedObject: {fileID: 2113660403909540271}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 600894269795448789, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 868746698880927147}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
---- !u!1 &1538870815817277803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 600894269795448789, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
-  m_PrefabInstance: {fileID: 2093581177456203454}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &868746698880927147
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538870815817277803}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5091341226102000866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6603956161167497820, guid: d0df67508e46a4be98a814dd8de14980, type: 3}
