@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     {
         camera.transform.position = titleTransform.position;
         camera.transform.rotation = titleTransform.rotation;
-        camera.GetComponent<Camera>().fieldOfView = 45;
+        camera.GetComponent<Camera>().fieldOfView = 40;
     }
     public void CameraSetUp()
     {

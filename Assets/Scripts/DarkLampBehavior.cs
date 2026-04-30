@@ -6,26 +6,29 @@ public class DarkLampBehavior : MonoBehaviour
     public GameObject pointLight;
     public GameObject light;
     public float speedReq = 11;
-    Boolean lit = false;
+    public Boolean lit = false;
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && !lit && other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude > speedReq) {
             GetComponent<ParticleSystem>().Play();
-            pointLight.SetActive(true);
-            light.SetActive(true);
-            lit = true;
-            // REMINDER: add sound effect
-            other.gameObject.GetComponent<PlayerController>().editCount(1);
+            other.gameObject.GetComponent<PlayerController>().setCount(other.gameObject.GetComponent<PlayerController>().getCount() + 1);
+            activate();
         }
-        if (other.gameObject.CompareTag("Enemy") && lit)
+        if (other.gameObject.CompareTag("Enemy") && lit && GameObject.FindGameObjectsWithTag("Player").Length == 1)
         {
-            // REMINDER: add different particle effect
             GetComponent<ParticleSystem>().Play();
-            pointLight.SetActive(false);
-            light.SetActive(false);
-            lit = false;
-            // REMINDER: add sound effect
-            GameObject.FindWithTag("Player").GetComponent<PlayerController>().editCount(-1);
+            GameObject.FindWithTag("Player").GetComponent<PlayerController>().setCount(GameObject.FindWithTag("Player").GetComponent<PlayerController>().getCount() - 1);
+            deactivate();
         }
+    }
+    public void activate() {
+        pointLight.SetActive(true);
+        light.SetActive(true);
+        lit = true;
+    }
+    public void deactivate() {
+        pointLight.SetActive(false);
+        light.SetActive(false);
+        lit = false;
     }
 }
